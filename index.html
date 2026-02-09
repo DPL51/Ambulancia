@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulación CAD - Ambulancias Londres</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Simulación CAD - Servicio de Ambulancias de Londres</h1>
+      <p>
+        Caso de estudio 1: atención de emergencias con operador de control,
+        operario de recursos, operador logístico y operador de radio.
+      </p>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>1) Registro del incidente</h2>
+        <form id="incident-form">
+          <label>
+            Dirección / Descripción del incidente
+            <input
+              type="text"
+              id="incident-location"
+              placeholder="Ej. Westminster Bridge, Londres"
+              required
+            />
+          </label>
+          <div class="grid">
+            <label>
+              Latitud
+              <input type="number" id="incident-lat" step="0.0001" required />
+            </label>
+            <label>
+              Longitud
+              <input type="number" id="incident-lng" step="0.0001" required />
+            </label>
+          </div>
+          <label>
+            Hora de la llamada
+            <input type="time" id="incident-time" required />
+          </label>
+          <button type="submit">Registrar incidente</button>
+        </form>
+        <div class="status-block" id="incident-status">
+          <strong>Estado:</strong> Sin incidentes activos.
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>2) Operario de localización de recursos</h2>
+        <div class="proposal">
+          <button id="propose-btn" type="button">Solicitar propuesta CAD</button>
+          <div class="proposal-details" id="proposal-details">
+            <p>Esperando propuesta del sistema CAD.</p>
+          </div>
+          <div class="proposal-actions">
+            <button id="accept-btn" type="button" disabled>Aceptar</button>
+            <button id="reject-btn" type="button" disabled>Rechazar</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>3) Operador logístico</h2>
+        <div class="logistic-actions">
+          <label class="checkbox">
+            <input type="checkbox" id="call-confirmation" />
+            Llamada a auxiliares realizada
+          </label>
+          <button id="call-btn" type="button" disabled>
+            Llamar a auxiliares
+          </button>
+        </div>
+        <div class="status-block" id="logistics-status">
+          <strong>Estado:</strong> Sin asignación activa.
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>4) Operador de radio</h2>
+        <button id="guide-btn" type="button" disabled>
+          Iniciar guía por radio
+        </button>
+        <div class="status-block" id="radio-status">
+          <strong>Estado:</strong> Esperando ambulancia asignada.
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Mapa de recursos</h2>
+        <div id="map"></div>
+        <p class="legend">
+          Marcadores azules: ambulancias disponibles · Rojo: incidente activo ·
+          Verde: ambulancia asignada
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>Bitácora de operación</h2>
+        <ul id="log"></ul>
+      </section>
+    </main>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="app.js"></script>
+  </body>
+</html>
